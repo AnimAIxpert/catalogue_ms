@@ -1,0 +1,9 @@
+#pip install -r requirements.txt
+fastapi
+uvicorn
+sqlalchemy
+sqlalchemy-utils
+python-jose
+mysqlclient
+python-dotenv
+pandas
