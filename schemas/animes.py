@@ -11,3 +11,10 @@ class Anime(BaseModel):
     episodes: int
     aired: str
     premiered: str
+    producers: list
+    licensors: list
+    studios: list
+    source: str
+    duration: str
+    audience: str
+    

@@ -12,11 +12,11 @@ PASSWORD_DB=os.environ.get('PASSWORD_DB')
 HOST_DB=os.environ.get('HOST_DB')
 PORT_DB=os.environ.get('PORT_DB')
 DATABASE_NAME=os.environ.get('DATABASE_NAME')
-SQLALCHEMY_DATABASE_URL = f"mysql+mysqldb://{USER_DB}:{PASSWORD_DB}@{HOST_DB}:{PORT_DB}/{DATABASE_NAME}"
-
+# SQLALCHEMY_DATABASE_URL = f"mysql+mysqldb://{USER_DB}:{PASSWORD_DB}@{HOST_DB}:{PORT_DB}/{DATABASE_NAME}"
+SQLALCHEMY_DATABASE_URL = f"postgresql+pg8000://{USER_DB}:{PASSWORD_DB}@{HOST_DB}:{PORT_DB}/{DATABASE_NAME}"
 engine = create_engine( SQLALCHEMY_DATABASE_URL)
 if not database_exists(engine.url):
-    create_database(engine.url)
+  create_database(engine.url)
 
     
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

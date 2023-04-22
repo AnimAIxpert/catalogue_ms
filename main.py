@@ -1,11 +1,13 @@
 # uvicorn main:app --reload
 import os
 from fastapi import FastAPI
+from database.database import engine
 from routers import anime
+from database import models
 from fastapi.middleware.cors import CORSMiddleware
 from utils.api import origins
 
-
+models.Base.metadata.create_all(bind=engine)
 # APP
 app = FastAPI()
 

@@ -23,7 +23,13 @@ def create_anime(db: Session, anime: animes.Anime):
         type=anime.type,
         episodes=anime.episodes,
         aired=anime.aired,
-        premiered=anime.premiered
+        premiered=anime.premiered,
+        producers=anime.producers,
+        licensors=anime.licensors,
+        studios=anime.studios,
+        source=anime.source,
+        duration=anime.duration,
+        audience=anime.audience
     )
     db.add(db_anime)
     db.commit()
@@ -51,6 +57,19 @@ def update_anime(db: Session, anime: animes.Anime):
         diff[Anime.aired] = anime.aired
     if anime.premiered != db_anime.premiered:
         diff[Anime.premiered] = anime.premiered
+    if anime.producers != db_anime.producers:
+        diff[Anime.producers] = anime.producers
+    if anime.licensors != db_anime.licensors:
+        diff[Anime.licensors] = anime.licensors
+    if anime.studios != db_anime.studios:
+        diff[Anime.studios] = anime.studios
+    if anime.source != db_anime.source:
+        diff[Anime.source] = anime.source
+    if anime.duration != db_anime.duration:
+        diff[Anime.duration] = anime.duration
+    if anime.audience != db_anime.audience:
+        diff[Anime.audience] = anime.audience
+
     if diff: db.query(Anime).filter(Anime.id == anime.id).update(diff, synchronize_session=False)
     db.commit()
     db.refresh(db_anime)

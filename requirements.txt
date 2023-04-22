@@ -4,6 +4,7 @@ uvicorn
 sqlalchemy
 sqlalchemy-utils
 python-jose
-mysqlclient
+# mysqlclient
 python-dotenv
 pandas
+pg8000
