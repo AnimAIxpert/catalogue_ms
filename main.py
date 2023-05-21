@@ -23,4 +23,4 @@ app.add_middleware(
 
 @app.get("/")
 async def root():
-    return {"message": "Hello This is AnimAIxpert's API"}
+    return {"message": "Hello This is AnimAIxpert's Catalogue Microservice"}

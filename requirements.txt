@@ -8,3 +8,6 @@ python-jose
 python-dotenv
 pandas
 pg8000
+httpx
+re
+tqdm

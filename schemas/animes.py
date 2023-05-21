@@ -17,4 +17,5 @@ class Anime(BaseModel):
     source: str
     duration: str
     audience: str
+    sypnopsis: str | None
     
