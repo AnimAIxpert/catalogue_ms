@@ -3,11 +3,9 @@ import pandas as pd
 from database.database import SessionLocal
 from database.models import Anime
 from database.crud import get_Anime
-from utils.utils import map_model_to_schema
-import httpx
+from utils.utils import map_model_to_schema, map_all_model_to_schema
 
 db_session = SessionLocal()
-
 
 router = APIRouter()
 
@@ -16,16 +14,25 @@ router = APIRouter()
 
 @router.get("/read_anime_database")
 async def update_anime_database():
+    ans = ""
     if not load_base_data():
-        return "error loading base data"
+        ans += "error loading base data\n"
+    else:
+        ans += "success loading base data\n"
     if not load_sypnosis():
-        return "error loading sypnosis"
-    return "database loaded"
+        ans += "error loading sypnosis\n"
+    else:
+        ans += "success loading sypnosis\n"
+    if not load_images_path():
+        ans += "error loading image urls\n"
+    else:
+        ans += "success loading image urls\n"
+    return ans
 
 @router.get("/anime")
 async def get_anime(id: int):
     anime = get_Anime(db_session, id)
-    return map_model_to_schema(anime)
+    return map_all_model_to_schema(anime)
 
 @router.get("/anime-by-genre")
 async def get_animes(genre: str, limit: int | None = None):
@@ -79,21 +86,25 @@ def load_base_data():
     
 def load_sypnosis():
     try:
-        sypnosis = pd.read_csv("data/anime_with_synopsis.csv")
-        for ind, anime in sypnosis.iterrows():
+        dataframe = pd.read_csv("data/anime_with_synopsis.csv")
+        # print(dataframe['synopsis'][0])
+        for ind, anime in dataframe.iterrows():
             register = db_session.query(Anime).filter(Anime.id == anime["MAL_ID"]).first()
-            register.sypnopsis = anime["Sypnopsis"]
+            register.synopsis = anime["synopsis"]
         db_session.commit()
+        return True
     except Exception as e:
         print(e)
         return False
     
 def load_images_path():
     try:
-        query = db_session.query(Anime).all()
-        for anime in query:
-            
-            anime.image_path = f"images/{anime.id}.jpg"
+        dataframe = pd.read_csv("data/images_paths.csv")
+        for ind, anime in dataframe.iterrows():
+            register = db_session.query(Anime).filter(Anime.id == anime["MAL_ID"]).first()
+            register.image_url = anime["image_url"]
+        db_session.commit()
+        return True
     
     except Exception as e:
         print(e)

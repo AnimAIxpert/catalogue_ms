@@ -9,5 +9,5 @@ python-dotenv
 pandas
 pg8000
 httpx
-re
+# re
 tqdm

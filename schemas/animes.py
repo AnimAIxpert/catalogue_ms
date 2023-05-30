@@ -1,8 +1,12 @@
 from pydantic import BaseModel
 
+
 class Anime(BaseModel):
     id: int
     name: str
+    image_url: str | None
+    
+class AnimeAll(Anime):
     score: float
     genres: list
     english_name: str
@@ -17,5 +21,6 @@ class Anime(BaseModel):
     source: str
     duration: str
     audience: str
-    sypnopsis: str | None
+    synopsis: str | None
+    
     

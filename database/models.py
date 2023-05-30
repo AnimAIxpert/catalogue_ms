@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Float
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Float, Text
 from sqlalchemy.dialects.postgresql import ARRAY
 from .database import Base
 
@@ -20,4 +20,6 @@ class Anime(Base):
     source = Column(String(255))
     duration = Column(String(255))
     audience = Column(String(255))
+    synopsis = Column(Text())
+    image_url = Column(String(255))
 
