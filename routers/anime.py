@@ -16,17 +16,17 @@ router = APIRouter()
 async def update_anime_database():
     ans = ""
     if not load_base_data():
-        ans += "error loading base data\n"
+        ans += "error loading base data \n "
     else:
-        ans += "success loading base data\n"
+        ans += "success loading base data \n "
     if not load_sypnosis():
-        ans += "error loading sypnosis\n"
+        ans += "error loading sypnosis \n "
     else:
-        ans += "success loading sypnosis\n"
+        ans += "success loading sypnosis \n "
     if not load_images_path():
-        ans += "error loading image urls\n"
+        ans += "error loading image urls \n "
     else:
-        ans += "success loading image urls\n"
+        ans += "success loading image urls \n "
     return ans
 
 @router.get("/anime")
