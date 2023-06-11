@@ -74,3 +74,4 @@ def update_anime(db: Session, anime: animes.Anime):
     db.commit()
     db.refresh(db_anime)
     return db_anime
+

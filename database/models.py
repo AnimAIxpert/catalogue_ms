@@ -1,6 +1,9 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Float, Text
 from sqlalchemy.dialects.postgresql import ARRAY
+from sqlalchemy.ext.declarative import declarative_base
 from .database import Base
+
+# Base = declarative_base()
 
 class Anime(Base):
     __tablename__ = "animes"

@@ -1,6 +1,8 @@
 from schemas.animes import Anime as AnimeSchema
 from schemas.animes import AnimeAll as AnimeSchemaComplete
 from database.models import Anime as AnimeModel
+from database.database import SessionLocal
+from database.load_database import load_base_data, load_sypnosis, load_images_path
 
 def process_char_list(x: list) -> list:
     return list(map(str.strip, "".join(x).split(",")))
@@ -36,3 +38,19 @@ def map_all_model_to_schema(anime_model: AnimeModel) -> AnimeSchemaComplete:
     )
     
     return anime_schema
+
+def verify_database():
+    db_session = SessionLocal()
+
+    if (len(db_session.query(AnimeModel).all()) == 0):
+        print("Loading database...")
+        load_base_data(db_session)
+        print("Database loaded")
+    if (db_session.query(AnimeModel).first().synopsis is None):
+        print("Loading database synopsis...")
+        load_sypnosis(db_session)
+        print("Database synopsis loaded")
+    if (db_session.query(AnimeModel).first().image_url is None):
+        print("Loading database images...")
+        load_images_path(db_session)
+        print("Database images loaded")
