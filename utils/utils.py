@@ -46,11 +46,17 @@ def verify_database():
         print("Loading database...")
         load_base_data(db_session)
         print("Database loaded")
+    else:
+        print("Database already loaded")
     if (db_session.query(AnimeModel).first().synopsis is None):
         print("Loading database synopsis...")
         load_sypnosis(db_session)
         print("Database synopsis loaded")
+    else:
+        print("Database synopsis already loaded")
     if (db_session.query(AnimeModel).first().image_url is None):
         print("Loading database images...")
         load_images_path(db_session)
         print("Database images loaded")
+    else:
+        print("Database images already loaded")
